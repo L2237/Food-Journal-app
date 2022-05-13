@@ -23,7 +23,7 @@ public class FoodItem {
     @Column(name = "calories")
     private Integer calories;
 
-    @Column(name = "quantity")
-    private Double quantity;
+    @Column(name = "unit")
+    private Double unit;
 
 }

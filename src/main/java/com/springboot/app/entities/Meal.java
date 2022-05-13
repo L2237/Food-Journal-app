@@ -1,14 +1,14 @@
 package com.springboot.app.entities;
 
-import com.springboot.app.entities.FoodItem;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
+import java.util.Date;
 
 @Data
 @RequiredArgsConstructor
 public class Meal {
-    private Integer totalCalories;
-    private List<FoodItem> ingredients;
+    private String mealId;
+    private Date date;
+    private String userId;
 }
