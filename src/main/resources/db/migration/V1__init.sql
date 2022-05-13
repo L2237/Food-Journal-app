@@ -14,3 +14,18 @@ CREATE TABLE servings
     quantity     DOUBLE
 );
 
+CREATE TABLE user
+(
+     user_Id    TEXT,
+     user_Name  TEXT,
+     email      TEXT,
+     password   TEXT
+
+);
+
+CREATE TABLE meal
+(
+    meal_Id     TEXT,
+    date        TEXT,
+    user_Id     TEXT
+);
