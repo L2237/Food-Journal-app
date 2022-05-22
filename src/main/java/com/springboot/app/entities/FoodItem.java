@@ -3,10 +3,7 @@ package com.springboot.app.entities;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -15,15 +12,15 @@ import javax.persistence.Table;
 public class FoodItem {
     @Id
     @Column(name = "food_id")
-    private String foodItemId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer foodId;
 
     @Column(name = "food_name")
-    private String name;
+    private String foodName;
 
     @Column(name = "calories")
     private Integer calories;
 
     @Column(name = "unit")
-    private Double unit;
-
+    private String unit;
 }

@@ -1,27 +1,30 @@
 package com.springboot.app.entities;
 
+import com.springboot.app.entities.enums.MealType;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @RequiredArgsConstructor
 @Entity
-@Table(name = "meal")
+@Table(name = "meals")
 public class Meal {
 
     @Id
-    @Column(name = "meal_Id")
-    private String mealId;
+    @Column(name = "meal_id")
+    private Integer mealId;
 
-    @Column(name = "date")
-    private Date date;
+    @Column(name = "meal_type")
+    private MealType mealType;
 
-    @Column(name = "user_Id")
-    private String userId;
+    @Column(name = "meal_date")
+    private Date meal_date;
+
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Serving> servings;
+
 }

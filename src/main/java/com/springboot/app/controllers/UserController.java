@@ -1,32 +1,38 @@
 package com.springboot.app.controllers;
 
-import org.springframework.web.bind.annotation.*;
+import com.springboot.app.entities.User;
+import com.springboot.app.entities.dto.LoginDTO;
+import com.springboot.app.servicies.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/user")
 public class UserController {
 
-    @GetMapping("login")
-    public String createPostRouteL(@PathVariable final String userName, @PathVariable final String password) {
+    @Autowired
+    private UserService userService;
 
-        // check in DB (user-ul exista)
-        // daca exista atunci returnezi "
-
-
-
-        return "I work too";
+    @GetMapping(value = "/users")
+    public List<User> getUsers() {
+        return userService.getUsers();
     }
 
-    @GetMapping("/user")
-    public String createLogin(String mail, String parola) {
-//        boolean existaUtilizator = false;
-//        User user = new User("mail", "pass");
-//        if (user.email.equals(mail) && user.password.equals(parola)) {
-//
-//            existaUtilizator = true;
-//        }
-        return "Te-ai logat cu success";
+    @PostMapping(value = "/signin")
+    public ResponseEntity<String> signin(@RequestBody LoginDTO loginDTO) throws Exception {
+        if(userService.signIn(loginDTO)) {
+            return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("User could not sign in!", HttpStatus.UNAUTHORIZED);
+        }
     }
+
 }
 
 

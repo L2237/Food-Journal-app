@@ -1,31 +1,39 @@
+CREATE TABLE users
+(
+    user_id   INTEGER NOT NULL AUTO_INCREMENT,
+    user_name TEXT,
+    email  TEXT,
+    password TEXT,
+    PRIMARY KEY (user_id)
+);
+
+CREATE TABLE meals
+(
+    meal_id   INTEGER NOT NULL,
+    meal_type TEXT,
+    meal_time  TEXT,
+    user_id INTEGER,
+    PRIMARY KEY (meal_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
 CREATE TABLE food_items
 (
-    food_id   TEXT,
+    food_id   BIGINT NOT NULL AUTO_INCREMENT,
     food_name TEXT,
     calories  INTEGER,
-    unit      DOUBLE
+    unit      TEXT,
+    PRIMARY KEY (food_id)
 );
 
-CREATE TABLE servings
+CREATE TABLE meal_servings
 (
-    serving_id   TEXT,
-    meal_id      TEXT,
-    food_item_id TEXT,
-    quantity     DOUBLE
+    serving_id INTEGER NOT NULL,
+    food_item    BIGINT NOT NULL,
+    meal_id    INTEGER NOT NULL,
+    quantity   DOUBLE,
+    PRIMARY KEY (serving_id),
+    FOREIGN KEY (food_item) REFERENCES food_items(food_id),
+    FOREIGN KEY (meal_id) REFERENCES meals(meal_id)
 );
 
-CREATE TABLE user
-(
-     user_Id    TEXT,
-     user_Name  TEXT,
-     email      TEXT,
-     password   TEXT
-
-);
-
-CREATE TABLE meal
-(
-    meal_Id     TEXT,
-    date        TEXT,
-    user_Id     TEXT
-);

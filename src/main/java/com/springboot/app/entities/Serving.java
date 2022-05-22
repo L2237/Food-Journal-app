@@ -3,26 +3,21 @@ package com.springboot.app.entities;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @RequiredArgsConstructor
 @Entity
-@Table(name = "servings")
+@Table(name = "meal_servings")
 public class Serving {
 
     @Id
     @Column(name = "serving_id")
-    private String servingId;
+    private Integer servingId;
 
-    @Column(name = "food_item_id")
-    private String foodItemId;
-
-    @Column(name = "meal_id")
-    private String mealId;
+    @ManyToOne
+    @JoinColumn(name="food_item", referencedColumnName = "food_id", insertable = false, updatable = false)
+    private FoodItem foodItem;
 
     @Column(name = "quantity")
     private Double quantity;
