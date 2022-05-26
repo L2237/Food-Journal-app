@@ -16,15 +16,21 @@ public class Meal {
 
     @Id
     @Column(name = "meal_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer mealId;
 
     @Column(name = "meal_type")
+    @Enumerated(EnumType.STRING)
     private MealType mealType;
 
-    @Column(name = "meal_date")
-    private Date meal_date;
+    @Column(name = "meal_time")
+    private Date mealTime;
 
-    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Serving> servings;
+//    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Serving> servings;
+
+    @ManyToOne
+    @JoinColumn(name="user", referencedColumnName = "user_id")
+    private User user;
 
 }

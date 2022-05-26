@@ -9,12 +9,12 @@ CREATE TABLE users
 
 CREATE TABLE meals
 (
-    meal_id   INTEGER NOT NULL,
+    meal_id   INTEGER NOT NULL AUTO_INCREMENT,
     meal_type TEXT,
-    meal_time  TEXT,
-    user_id INTEGER,
+    meal_time  DATE,
+    user INTEGER,
     PRIMARY KEY (meal_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    FOREIGN KEY (user) REFERENCES users(user_id)
 );
 
 CREATE TABLE food_items

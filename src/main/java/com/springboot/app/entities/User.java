@@ -25,6 +25,4 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Meal> meals;
 }
