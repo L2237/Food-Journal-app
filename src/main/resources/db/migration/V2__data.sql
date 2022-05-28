@@ -16,3 +16,8 @@ INSERT INTO `meals`(`meal_type`,`meal_time`,`user`) VALUES ('DINNER','2022-05-23
 INSERT INTO `meals`(`meal_type`,`meal_time`,`user`) VALUES ('LUNCH','2022-05-23',1);
 INSERT INTO `meals`(`meal_type`,`meal_time`,`user`) VALUES ('LUNCH','2022-05-23',2);
 INSERT INTO `meals`(`meal_type`,`meal_time`,`user`) VALUES ('DINNER','2022-05-23',2);
+
+# SERVINGS
+INSERT INTO `meal_servings`(`food_item`,`meal_id`,`quantity`) VALUES (1,1,2);
+INSERT INTO `meal_servings`(`food_item`,`meal_id`, `quantity`) VALUES (2,1,4);
+INSERT INTO `meal_servings`(`food_item`,`meal_id`,`quantity`) VALUES (3,1,5);

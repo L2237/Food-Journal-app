@@ -38,7 +38,10 @@ public class MealService {
         mealToSaveInDB.setMealType(mealDTO.getMealType());
         mealToSaveInDB.setMealTime(mealDTO.getMealTime());
         mealToSaveInDB.setUser(user);
+        // seteaza caloriile per meal ----> apelezi metoda
 
         mealRepository.save(mealToSaveInDB);
     }
+
+    // creaza o metoda care calculeaza caloriile per meal
 }

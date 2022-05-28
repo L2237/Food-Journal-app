@@ -26,11 +26,15 @@ public class Meal {
     @Column(name = "meal_time")
     private Date mealTime;
 
-//    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Serving> servings;
+    // calories per meal
+
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Serving> servings;
 
     @ManyToOne
     @JoinColumn(name="user", referencedColumnName = "user_id")
     private User user;
+
+
 
 }

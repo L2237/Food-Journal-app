@@ -28,7 +28,7 @@ CREATE TABLE food_items
 
 CREATE TABLE meal_servings
 (
-    serving_id INTEGER NOT NULL,
+    serving_id INTEGER NOT NULL AUTO_INCREMENT,
     food_item    BIGINT NOT NULL,
     meal_id    INTEGER NOT NULL,
     quantity   DOUBLE,

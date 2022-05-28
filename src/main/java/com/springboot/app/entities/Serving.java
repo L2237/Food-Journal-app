@@ -13,6 +13,7 @@ public class Serving {
 
     @Id
     @Column(name = "serving_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer servingId;
 
     @ManyToOne
