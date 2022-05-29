@@ -24,7 +24,7 @@ public class ServingController {
 
     @PostMapping(value = "/addServing")
     public void addServing(@RequestBody ServingDTO servingDTO) {
-        // trebuie adaugat
+        servingService.addServing(servingDTO);
     }
 
 }

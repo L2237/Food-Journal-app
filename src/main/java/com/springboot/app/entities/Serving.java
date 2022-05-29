@@ -22,4 +22,7 @@ public class Serving {
 
     @Column(name = "quantity")
     private Double quantity;
+
+    private Double caloriesPerServing;
+
 }

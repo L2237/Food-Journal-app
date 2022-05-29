@@ -30,7 +30,6 @@ public class MealService {
     }
 
     public void addMeal(final MealDTO mealDTO) throws Exception {
-        System.out.println(mealDTO);
         final User user = userRepository.findById(mealDTO.getUserId()) .orElseThrow(() ->
                 new Exception("User id: " + mealDTO.getUserId() + " does not exist in DB!"));
 
