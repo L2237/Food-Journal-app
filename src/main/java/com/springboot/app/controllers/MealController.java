@@ -3,16 +3,16 @@ package com.springboot.app.controllers;
 import com.springboot.app.entities.Meal;
 import com.springboot.app.entities.dto.MealDTO;
 import com.springboot.app.servicies.MealService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class MealController {
 
-    @Autowired
-    private MealService mealService;
+    private final MealService mealService;
 
     @GetMapping(value = "/getMeals")
     private List<Meal> getMeals() {

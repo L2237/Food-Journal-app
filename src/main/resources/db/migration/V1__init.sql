@@ -21,7 +21,7 @@ CREATE TABLE food_items
 (
     food_id   BIGINT NOT NULL AUTO_INCREMENT,
     food_name TEXT,
-    calories  INTEGER,
+    calories  DOUBLE,
     unit      TEXT,
     PRIMARY KEY (food_id)
 );
@@ -29,9 +29,10 @@ CREATE TABLE food_items
 CREATE TABLE meal_servings
 (
     serving_id INTEGER NOT NULL AUTO_INCREMENT,
-    food_item    BIGINT NOT NULL,
+    food_item  BIGINT,
     meal_id    INTEGER,
     quantity   DOUBLE,
+    calories_per_serving DOUBLE,
     PRIMARY KEY (serving_id),
     FOREIGN KEY (food_item) REFERENCES food_items(food_id),
     FOREIGN KEY (meal_id) REFERENCES meals(meal_id)

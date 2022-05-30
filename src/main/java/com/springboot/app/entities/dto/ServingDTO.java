@@ -8,5 +8,5 @@ public class ServingDTO {
 
     private FoodItem foodItem;
     private Double quantity;
-    private MealDTO mealDTO;
+    private MealDTO meal;
 }

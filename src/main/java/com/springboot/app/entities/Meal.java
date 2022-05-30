@@ -1,5 +1,6 @@
 package com.springboot.app.entities;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.springboot.app.entities.enums.MealType;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "meals")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Meal {
 
     @Id
@@ -26,13 +28,10 @@ public class Meal {
     @Column(name = "meal_time")
     private Date mealTime;
 
-    @OneToMany
-    private List<Serving> servings;
-
     @ManyToOne
     @JoinColumn(name="user", referencedColumnName = "user_id")
     private User user;
 
-
-
+    @Column(name = "calories_per_meal")
+    private Double caloriesPerMeal;
 }

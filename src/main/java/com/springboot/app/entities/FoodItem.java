@@ -19,7 +19,7 @@ public class FoodItem {
     private String foodName;
 
     @Column(name = "calories")
-    private Integer calories;
+    private Double calories;
 
     @Column(name = "unit")
     private String unit;

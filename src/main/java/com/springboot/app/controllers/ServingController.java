@@ -1,21 +1,21 @@
 package com.springboot.app.controllers;
 
-import com.springboot.app.entities.FoodItem;
-import com.springboot.app.entities.Meal;
 import com.springboot.app.entities.Serving;
 import com.springboot.app.entities.dto.ServingDTO;
-import com.springboot.app.servicies.MealService;
 import com.springboot.app.servicies.ServingService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class ServingController {
 
-    @Autowired
-    private ServingService servingService;
+    private final ServingService servingService;
 
     @GetMapping(value = "/getServings")
     private List<Serving> getServings() {
@@ -24,6 +24,7 @@ public class ServingController {
 
     @PostMapping(value = "/addServing")
     public void addServing(@RequestBody ServingDTO servingDTO) {
+        System.out.println(servingDTO.toString());
         servingService.addServing(servingDTO);
     }
 

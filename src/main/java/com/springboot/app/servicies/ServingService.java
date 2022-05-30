@@ -5,24 +5,33 @@ import com.springboot.app.entities.Meal;
 import com.springboot.app.entities.Serving;
 import com.springboot.app.entities.dto.ServingDTO;
 import com.springboot.app.repositories.FoodItemRepository;
+import com.springboot.app.repositories.MealRepository;
 import com.springboot.app.repositories.ServingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.springboot.app.utils.MD5Utils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 @Service
+@RequiredArgsConstructor
 public class ServingService {
 
-    @Autowired
-    private ServingRepository servingRepository;
-
-    @Autowired
-    private FoodItemRepository foodItemRepository;
+    private final ServingRepository servingRepository;
+    private final MealRepository mealRepository;
+    private final FoodItemRepository foodItemRepository;
 
     public List<Serving> getServings() {
-        return servingRepository.findAll();
+        List<Serving> servings = servingRepository.findAll();
+        for(Serving serving: servings) {
+            serving.getMealId().getUser().setPassword(MD5Utils.bytesToHex(MD5Utils.digest(serving.getMealId().getUser().getPassword().getBytes(UTF_8))));
+            serving.setCaloriesPerServing(calculateCaloriesPerServing(serving.getFoodItem().getCalories(), serving.getQuantity()));
+        }
+
+        return servings;
     }
 
     public void addServing(final ServingDTO servingDTO) {
@@ -50,6 +59,9 @@ public class ServingService {
            }
        }
 
+       final Optional<Meal> mealFromDB = mealRepository.findById(servingDTO.getMeal().getMealId());
+       serving.setMealId(mealFromDB.get());
+
        serving.setFoodItem(foodItem);
        serving.setQuantity(servingDTO.getQuantity());
        serving.setCaloriesPerServing(calculateCaloriesPerServing(foodItem.getCalories(), servingDTO.getQuantity()));
@@ -57,9 +69,7 @@ public class ServingService {
        servingRepository.save(serving);
     }
 
-    private Double calculateCaloriesPerServing(final Integer calories, final Double quantity) {
-        System.out.println("Calories:" + calories);
-        System.out.println("Quantity:" + quantity);
+    private Double calculateCaloriesPerServing(final Double calories, final Double quantity) {
         return  calories * quantity;
     }
 

@@ -2,24 +2,24 @@ package com.springboot.app.servicies;
 
 import com.springboot.app.entities.FoodItem;
 import com.springboot.app.repositories.FoodItemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class FoodService {
 
-    @Autowired
     private final FoodItemRepository foodItemRepository;
-
-    public FoodService(FoodItemRepository foodItemRepository) {
-        this.foodItemRepository = foodItemRepository;
-    }
 
     public List<FoodItem> getFoodItems() {
         return foodItemRepository.findAll();
+    }
+
+    public FoodItem getFoodItem(final String foodName) throws Exception{
+        return foodItemRepository.findByFoodName(foodName).orElseThrow(() -> new Exception("Food name: " + foodName + " does not exist in DB!"));
     }
 
     public void addFoodItem(final FoodItem foodItem) {
@@ -27,12 +27,13 @@ public class FoodService {
     }
 
     @Transactional
-    public void deleteFoodItemByName(final String foodName) {
-        foodItemRepository.deleteByFoodName(foodName);
+    public void deleteFoodItemByNameOrId(final String foodNameOrFoodId) {
+        try {
+            Integer foodId = Integer.parseInt(foodNameOrFoodId);
+            foodItemRepository.deleteByFoodNameOrFoodId(null, foodId);
+        } catch (NumberFormatException numberFormatException) {
+            foodItemRepository.deleteByFoodNameOrFoodId(foodNameOrFoodId, null);
+        }
     }
 
-    @Transactional
-    public void deleteFoodItem(final Integer foodId) {
-        foodItemRepository.deleteById(foodId);
-    }
 }

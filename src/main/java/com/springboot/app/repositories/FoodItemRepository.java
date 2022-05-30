@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface FoodItemRepository extends JpaRepository<FoodItem, Integer>  {
 
-    void deleteByFoodName(final String foodName);
+    void deleteByFoodNameOrFoodId(final String foodName, final Integer foodId);
 
     Optional<FoodItem> findByFoodName(final String foodName);
 }

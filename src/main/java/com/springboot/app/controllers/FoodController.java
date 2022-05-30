@@ -2,20 +2,26 @@ package com.springboot.app.controllers;
 
 import com.springboot.app.entities.FoodItem;
 import com.springboot.app.servicies.FoodService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class FoodController {
 
-    @Autowired
-    private FoodService foodService;
+    private final FoodService foodService;
 
     @GetMapping(value = "/foodItems")
     public List<FoodItem> getFoodItems() {
         return foodService.getFoodItems();
+    }
+
+    @GetMapping(value = "/foodDetails/{foodName}")
+    public FoodItem getFoodDetails(@PathVariable(value = "foodName") String foodName) throws Exception {
+        return foodService.getFoodItem(foodName);
     }
 
     @PostMapping(value = "/addFoodItem")
@@ -23,13 +29,8 @@ public class FoodController {
         foodService.addFoodItem(foodItem);
     }
 
-    @DeleteMapping(value = "/deleteFoodItemByName/{foodName}")
-    public void deleteFoodItemByName(@PathVariable(value = "foodName") String foodName) {
-        foodService.deleteFoodItemByName(foodName);
-    }
-
-    @DeleteMapping(value = "/deleteFoodItem/{foodId}")
-    public void deleteFoodItemById(@PathVariable(value = "foodId") Integer foodId) {
-        foodService.deleteFoodItem(foodId);
+    @DeleteMapping(value = "/deleteFoodItem/{foodNameOrId}")
+    public void deleteFoodItemByName(@PathVariable(value = "foodNameOrId") String foodNameOrId) {
+        foodService.deleteFoodItemByNameOrId(foodNameOrId);
     }
 }
