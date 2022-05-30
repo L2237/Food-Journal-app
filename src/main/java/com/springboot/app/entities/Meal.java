@@ -26,9 +26,7 @@ public class Meal {
     @Column(name = "meal_time")
     private Date mealTime;
 
-    // calories per meal
-
-    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
     private List<Serving> servings;
 
     @ManyToOne

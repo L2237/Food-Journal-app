@@ -1,6 +1,7 @@
 package com.springboot.app.servicies;
 
 import com.springboot.app.entities.FoodItem;
+import com.springboot.app.entities.Meal;
 import com.springboot.app.entities.Serving;
 import com.springboot.app.entities.dto.ServingDTO;
 import com.springboot.app.repositories.FoodItemRepository;
@@ -35,6 +36,7 @@ public class ServingService {
                foodItem.setFoodName(foodItemFromDB.get().getFoodName());
                foodItem.setCalories(foodItemFromDB.get().getCalories());
                foodItem.setUnit(foodItemFromDB.get().getUnit());
+               foodItem.setFoodId(foodItemFromDB.get().getFoodId());
            } else {
                // create a new food item if it doesn't exist in DB
                final FoodItem foodItemDTO = servingDTO.getFoodItem();
@@ -43,10 +45,13 @@ public class ServingService {
                foodItem.setUnit(foodItemDTO.getUnit());
 
                foodItemRepository.save(foodItem);
+               final Optional<FoodItem> foodItemSaveFromDB= foodItemRepository.findByFoodName(servingDTO.getFoodItem().getFoodName());
+               foodItem.setFoodId(foodItemSaveFromDB.get().getFoodId());
            }
        }
 
        serving.setFoodItem(foodItem);
+       serving.setQuantity(servingDTO.getQuantity());
        serving.setCaloriesPerServing(calculateCaloriesPerServing(foodItem.getCalories(), servingDTO.getQuantity()));
 
        servingRepository.save(serving);

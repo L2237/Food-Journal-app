@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @RequiredArgsConstructor
@@ -17,7 +18,7 @@ public class Serving {
     private Integer servingId;
 
     @ManyToOne
-    @JoinColumn(name="food_item", referencedColumnName = "food_id", insertable = false, updatable = false)
+    @JoinColumn(name="food_item", referencedColumnName = "food_id")
     private FoodItem foodItem;
 
     @Column(name = "quantity")

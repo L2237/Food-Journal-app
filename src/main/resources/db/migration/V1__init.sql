@@ -30,7 +30,7 @@ CREATE TABLE meal_servings
 (
     serving_id INTEGER NOT NULL AUTO_INCREMENT,
     food_item    BIGINT NOT NULL,
-    meal_id    INTEGER NOT NULL,
+    meal_id    INTEGER,
     quantity   DOUBLE,
     PRIMARY KEY (serving_id),
     FOREIGN KEY (food_item) REFERENCES food_items(food_id),
